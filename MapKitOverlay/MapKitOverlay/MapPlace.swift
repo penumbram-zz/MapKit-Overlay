@@ -19,4 +19,24 @@ class MapPlace {
     var overlayBottomRightCoordinate : CLLocationCoordinate2D!
     var overlayBoundingMapRect : MKMapRect!
     var name : String!
+    
+    public func makeMapAdjustments() {
+        self.setBottomRightCoordinate()
+        self.makeBoundingRect()
+    }
+    
+    private func setBottomRightCoordinate() {
+        self.overlayBottomRightCoordinate = CLLocationCoordinate2DMake(self.overlayBottomLeftCoordinate.latitude, self.overlayTopRightCoordinate.longitude)
+    }
+    
+    private func makeBoundingRect() {
+        let topLeft = MKMapPointForCoordinate(self.overlayTopLeftCoordinate);
+        let topRight = MKMapPointForCoordinate(self.overlayTopRightCoordinate);
+        let bottomLeft = MKMapPointForCoordinate(self.overlayBottomLeftCoordinate);
+    
+        self.overlayBoundingMapRect = MKMapRectMake(topLeft.x, topLeft.y,
+        fabs(topLeft.x - topRight.x),
+        fabs(topLeft.y - bottomLeft.y));
+    }
+    
 }

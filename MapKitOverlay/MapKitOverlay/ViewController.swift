@@ -26,9 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         for i in 0..<mapPlace.boundaryPointsCount {
             mapPlace.boundary[i] = CLLocationCoordinate2DMake(CLLocationDegrees(arrayOfPoints[i].x),CLLocationDegrees(arrayOfPoints[i].y))
         }
-//        mapPlace.boundary
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        mapPlace.makeMapAdjustments()
     }
     
     func getPoints() -> [CGPoint] {
