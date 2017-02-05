@@ -12,9 +12,37 @@ import MapKit
 class ViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-
+    var place : MapPlace!
+    var selectedOptions : Array<Any>!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mapView.delegate = self
+        self.selectedOptions = []
+        self.populateData()
+        let latDelta = self.place.overlayTopLeftCoordinate.latitude - self.place.overlayBottomRightCoordinate.latitude
+        let span = MKCoordinateSpanMake(CLLocationDegrees(fabsf(Float(latDelta))), 0.0);
+        let region = MKCoordinateRegionMake(self.place.midCoordinate, span);
+        self.mapView.region = region;
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.addOverlay()
+    }
+    
+    func addOverlay() {
+        let overlay = MapPlaceOverlay(place: self.place)
+        self.mapView.add(overlay)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let magicMountainImage = UIImage.init(named: "overlay_park")
+        let overlayView = MapPlaceOverlayView.init(overlay: overlay, overlayImage: magicMountainImage!)
+        return overlayView;
+    }
+    
+    //Populating Map Data
+    func populateData() {
         let mapPlace = MapPlace()
         mapPlace.midCoordinate = CLLocationCoordinate2DMake(34.4248, -118.5971)
         mapPlace.overlayTopLeftCoordinate = CLLocationCoordinate2DMake(34.4311, -118.6012)
@@ -27,6 +55,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             mapPlace.boundary[i] = CLLocationCoordinate2DMake(CLLocationDegrees(arrayOfPoints[i].x),CLLocationDegrees(arrayOfPoints[i].y))
         }
         mapPlace.makeMapAdjustments()
+        self.place = mapPlace
     }
     
     func getPoints() -> [CGPoint] {
@@ -43,13 +72,5 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return array
     }
     
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

@@ -14,6 +14,9 @@
 		B775E7A71E476099007B618E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B775E7A51E476099007B618E /* LaunchScreen.storyboard */; };
 		B775E7B01E47613D007B618E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B775E7AF1E47613D007B618E /* MapKit.framework */; };
 		B775E7B41E4762B4007B618E /* MapPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775E7B31E4762B4007B618E /* MapPlace.swift */; };
+		B775E7B61E477FFC007B618E /* MapPlaceOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775E7B51E477FFC007B618E /* MapPlaceOverlay.swift */; };
+		B775E7B81E4788A6007B618E /* MapPlaceOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B775E7B71E4788A6007B618E /* MapPlaceOverlayView.swift */; };
+		B775E7BA1E478DDA007B618E /* overlay_park.png in Resources */ = {isa = PBXBuildFile; fileRef = B775E7B91E478DDA007B618E /* overlay_park.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		B775E7A81E476099007B618E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B775E7AF1E47613D007B618E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B775E7B31E4762B4007B618E /* MapPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlace.swift; sourceTree = "<group>"; };
+		B775E7B51E477FFC007B618E /* MapPlaceOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlaceOverlay.swift; sourceTree = "<group>"; };
+		B775E7B71E4788A6007B618E /* MapPlaceOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlaceOverlayView.swift; sourceTree = "<group>"; };
+		B775E7B91E478DDA007B618E /* overlay_park.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay_park.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,9 @@
 				B775E7A51E476099007B618E /* LaunchScreen.storyboard */,
 				B775E7A81E476099007B618E /* Info.plist */,
 				B775E7B31E4762B4007B618E /* MapPlace.swift */,
+				B775E7B51E477FFC007B618E /* MapPlaceOverlay.swift */,
+				B775E7B71E4788A6007B618E /* MapPlaceOverlayView.swift */,
+				B775E7B91E478DDA007B618E /* overlay_park.png */,
 			);
 			path = MapKitOverlay;
 			sourceTree = "<group>";
@@ -140,6 +149,7 @@
 			files = (
 				B775E7A71E476099007B618E /* LaunchScreen.storyboard in Resources */,
 				B775E7A41E476099007B618E /* Assets.xcassets in Resources */,
+				B775E7BA1E478DDA007B618E /* overlay_park.png in Resources */,
 				B775E7A21E476098007B618E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +162,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B775E79F1E476098007B618E /* ViewController.swift in Sources */,
+				B775E7B81E4788A6007B618E /* MapPlaceOverlayView.swift in Sources */,
+				B775E7B61E477FFC007B618E /* MapPlaceOverlay.swift in Sources */,
 				B775E79D1E476098007B618E /* AppDelegate.swift in Sources */,
 				B775E7B41E4762B4007B618E /* MapPlace.swift in Sources */,
 			);
