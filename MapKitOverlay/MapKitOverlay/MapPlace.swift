@@ -19,6 +19,7 @@ class MapPlace {
     var overlayBottomRightCoordinate : CLLocationCoordinate2D!
     var overlayBoundingMapRect : MKMapRect!
     var name : String!
+    var customPointAnnotation : CustomPointAnnotation?
     
     public func makeMapAdjustments() {
         self.setBottomRightCoordinate()

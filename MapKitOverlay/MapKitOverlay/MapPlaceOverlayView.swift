@@ -27,5 +27,4 @@ class MapPlaceOverlayView : MKOverlayRenderer {
         context.translateBy(x: 0.0, y: -rect.size.height);
         context.draw(imageReference!, in: rect)
     }
-    
 }

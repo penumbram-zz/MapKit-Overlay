@@ -18,16 +18,19 @@ class ViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         self.mapView.delegate = self
         self.selectedOptions = []
-        self.populateData()
         let latDelta = self.place.overlayTopLeftCoordinate.latitude - self.place.overlayBottomRightCoordinate.latitude
-        let span = MKCoordinateSpanMake(CLLocationDegrees(fabsf(Float(latDelta))), 0.0);
-        let region = MKCoordinateRegionMake(self.place.midCoordinate, span);
-        self.mapView.region = region;
+        let span = MKCoordinateSpanMake(CLLocationDegrees(fabsf(Float(latDelta))), 0.0)
+        let region = MKCoordinateRegionMake(self.place.midCoordinate, span)
+        self.mapView.region = region
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.addOverlay()
+        if self.place.customPointAnnotation == nil {
+            self.addOverlay()
+        } else {
+            self.mapView.addAnnotation(self.place.customPointAnnotation!)
+        }
     }
     
     func addOverlay() {
@@ -35,41 +38,25 @@ class ViewController: UIViewController, MKMapViewDelegate {
         self.mapView.add(overlay)
     }
     
+    
+    //Rendering custom images
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let magicMountainImage = UIImage.init(named: "overlay_park")
-        let overlayView = MapPlaceOverlayView.init(overlay: overlay, overlayImage: magicMountainImage!)
-        return overlayView;
+        let image = UIImage.init(named: self.place.name)
+        let overlayView = MapPlaceOverlayView.init(overlay: overlay, overlayImage: image!)
+        return overlayView
     }
     
-    //Populating Map Data
-    func populateData() {
-        let mapPlace = MapPlace()
-        mapPlace.midCoordinate = CLLocationCoordinate2DMake(34.4248, -118.5971)
-        mapPlace.overlayTopLeftCoordinate = CLLocationCoordinate2DMake(34.4311, -118.6012)
-        mapPlace.overlayTopRightCoordinate = CLLocationCoordinate2DMake(34.4311,-118.5912)
-        mapPlace.overlayBottomLeftCoordinate = CLLocationCoordinate2DMake(34.4194,-118.6012)
-        let arrayOfPoints = self.getPoints()
-        mapPlace.boundaryPointsCount = arrayOfPoints.count
-        mapPlace.boundary = Array(repeating: CLLocationCoordinate2D(), count: arrayOfPoints.count)
-        for i in 0..<mapPlace.boundaryPointsCount {
-            mapPlace.boundary[i] = CLLocationCoordinate2DMake(CLLocationDegrees(arrayOfPoints[i].x),CLLocationDegrees(arrayOfPoints[i].y))
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let customPointAnnotation = annotation as? CustomPointAnnotation {
+            let customAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: nil, image: customPointAnnotation.image)
+            return customAnnotationView
         }
-        mapPlace.makeMapAdjustments()
-        self.place = mapPlace
+        
+        return nil
     }
     
-    func getPoints() -> [CGPoint] {
-        var array : [CGPoint] = []
-        array.append(CGPoint(x: 34.4313, y: -118.59890))
-        array.append(CGPoint(x: 34.4274, y: -118.60246))
-        array.append(CGPoint(x: 34.4268, y: -118.60181))
-        array.append(CGPoint(x: 34.4202, y: -118.6004))
-        array.append(CGPoint(x: 34.42013, y: -118.59239))
-        array.append(CGPoint(x: 34.42049, y: -118.59051))
-        array.append(CGPoint(x: 34.42305, y: -118.59276))
-        array.append(CGPoint(x: 34.42557, y: -118.59289))
-        array.append(CGPoint(x: 34.42739, y: -118.59171))
-        return array
+    @IBAction func btnBackAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
